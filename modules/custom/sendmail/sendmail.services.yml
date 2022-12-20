@@ -1,0 +1,3 @@
+services:
+  sendmail_service:
+    class: Drupal\sendmail\Service\Sendmail

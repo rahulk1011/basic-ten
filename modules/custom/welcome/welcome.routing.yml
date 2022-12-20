@@ -1,0 +1,7 @@
+welcome.welcome:
+    path: '/welcome'
+    defaults:
+        _controller: '\Drupal\welcome\Controller\WelcomeController::welcome'
+        _title: 'Welcome to My Module in Drupal 10'
+    requirements: 
+        _permission: 'access content'

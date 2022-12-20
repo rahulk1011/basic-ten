@@ -1,0 +1,6 @@
+name: Send-Mail
+type: module
+description: Custom module to send mails
+package: Custom
+core_version_requirement: ^9 || ^10
+version: 1.1
