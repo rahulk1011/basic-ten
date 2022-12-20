@@ -1,35 +1,35 @@
 candidates.form:
-    path: '/add-candidates'
-    defaults:
-        _title: 'Add Candidates'
-        _form: '\Drupal\candidates\Form\CandidatesForm'
-    requirements:
-        _permission: 'access content'
+  path: '/add-candidates'
+  defaults:
+    _title: 'Add Candidates'
+    _form: '\Drupal\candidates\Form\CandidatesForm'
+  requirements:
+    _permission: 'access content'
 
 get_candidate_detail:
- path: 'api/get_candidate_detail'
- defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::get_candidate_detail' }
- methods: [POST]
- requirements:
-  _permission: 'access content'
+  path: 'api/get_candidate_detail'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::get_candidate_detail' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'
 
 add_candidate_detail:
- path: 'api/add_candidate_detail'
- defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::add_candidate_detail' }
- methods: [POST]
- requirements:
-   _permission: 'access content'
+  path: 'api/add_candidate_detail'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::add_candidate_detail' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'
 
 edit_candidate_detail:
- path: 'api/edit_candidate_detail'
- defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::edit_candidate_detail' }
- methods: [POST]
- requirements:
-   _permission: 'access content'
+  path: 'api/edit_candidate_detail'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::edit_candidate_detail' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'
 
 delete_candidate :
- path: 'api/delete_candidate'
- defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::delete_candidate' }
- methods: [POST]
- requirements:
-   _permission: 'access content'
+  path: 'api/delete_candidate'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::delete_candidate' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'

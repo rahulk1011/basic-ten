@@ -27,6 +27,11 @@ class CandidatesForm extends FormBase {
 			'#title' => 'Candidate Name',
 			'#required' => TRUE,
 		);
+		$form['candidate_email'] = array(
+			'#type' => 'email',
+			'#title' => 'Email-ID',
+			'#required' => TRUE,
+		);
 		$form['candidate_dob'] = array(
 			'#type' => 'date',
 			'#title' => 'Date of Birth',
@@ -34,7 +39,7 @@ class CandidatesForm extends FormBase {
 		);
 		$form['candidate_gender'] = array(
 			'#type' => 'select',
-			'#title' => ('Gender'),
+			'#title' => 'Gender',
 			'#required' => TRUE,
 			'#options' => array(
 				'male' => 'Male',
@@ -56,7 +61,6 @@ class CandidatesForm extends FormBase {
 			'#title' => 'Description',
 			'#required' => TRUE,
 		);
-		
 		$form['actions']['#type'] = 'actions';
 		$form['actions']['submit'] = array(
 			'#type' => 'submit',
@@ -73,20 +77,23 @@ class CandidatesForm extends FormBase {
 		if ($form_state->getValue('candidate_name') == '') {
 			$form_state->setErrorByName('candidate_name', $this->t('Please Enter Candidate Name'));
 		}
+		if ($form_state->getValue('candidate_email') == '') {
+			$form_state->setErrorByName('candidate_email', $this->t('Please Enter Email-ID'));
+		}
 		if ($form_state->getValue('candidate_dob') == '') {
-			$form_state->setErrorByName('candidate_dob', $this->t('Please Enter Candidate Date of Birth'));
+			$form_state->setErrorByName('candidate_dob', $this->t('Please Enter Date of Birth'));
 		}
 		if ($form_state->getValue('candidate_gender') == '') {
-			$form_state->setErrorByName('candidate_gender', $this->t('Please Enter Candidate Gender'));
+			$form_state->setErrorByName('candidate_gender', $this->t('Please Enter Gender'));
 		}
 		if ($form_state->getValue('candidate_city') == '') {
-			$form_state->setErrorByName('candidate_city', $this->t('Please Enter Candidate City'));
+			$form_state->setErrorByName('candidate_city', $this->t('Please Enter City'));
 		}
 		if ($form_state->getValue('candidate_country') == '') {
-			$form_state->setErrorByName('candidate_country', $this->t('Please Enter Candidate Country'));
+			$form_state->setErrorByName('candidate_country', $this->t('Please Enter Country'));
 		}
 		if ($form_state->getValue('candidate_description') == '') {
-			$form_state->setErrorByName('candidate_description', $this->t('Please Enter Candidate Description'));
+			$form_state->setErrorByName('candidate_description', $this->t('Please Enter Description'));
 		}
 	}
 
@@ -100,6 +107,7 @@ class CandidatesForm extends FormBase {
 		$node->promote = 0;
 		$node->sticky = 0;
 		$node->title= $form_state->getValue('candidate_name');
+		$node->field_email_id = $form_state->getValue('candidate_email');
 		$node->field_date_of_birth = $form_state->getValue('candidate_dob');
 		$node->field_gender = $form_state->getValue('candidate_gender');
 		$node->field_city = $form_state->getValue('candidate_city');
@@ -107,6 +115,6 @@ class CandidatesForm extends FormBase {
 		$node->field_description = $form_state->getValue('candidate_description');
 		$node->save();
 
-		drupal_set_message('Candidate Data Save Successful');
+		\Drupal::messenger()->addMessage('Candidate Data Saved Successfully');
 	}
 }
