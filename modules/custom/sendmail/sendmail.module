@@ -21,4 +21,3 @@ function sendmail_mail($key, &$message, $params) {
             break;
     }
 }
-//lvslchqleuqbgylk
