@@ -34,13 +34,14 @@ class CandidatesController extends ControllerBase {
 
 			foreach($candidate_fetch_details as $key => $node_id){
 				$nodeid = $node_id->nid;
-				$node = \Drupal::entityManager()->getStorage('node')->load($nodeid);
+				$node = \Drupal::EntityTypeManager()->getStorage('node')->load($nodeid);
 				$candidate_details['candidate_id'] = $nodeid;
 				$candidate_details['candidate_name'] = $node->get('title')->value;
+				$candidate_details['candidate_email'] = $node->get('field_email_id')->value;
 				$date = date_create($node->get('field_date_of_birth')->value);
-				$date_of_birth = date_format($date, "d/m/Y");
+				$date_of_birth = date_format($date, "d M Y");
 				$candidate_details['candidate_dob'] = $date_of_birth;
-				$candidate_details['candidate_gender'] = $node->get('field_gender')->value;
+				$candidate_details['candidate_gender'] = ucfirst($node->get('field_gender')->value);
 				$candidate_details['candidate_city'] = $node->get('field_city')->value;
 				$candidate_details['candidate_country'] = $node->get('field_country')->value;
 				$candidate_details['candidate_description'] = $node->get('field_description')->value;
@@ -48,7 +49,7 @@ class CandidatesController extends ControllerBase {
 			}
 			$final_api_reponse = array(
 				"status" => "OK",
-				"message" => "All Candidate Details",
+				"message" => "All Candidate List",
 				"result" => $all_candidates
 			);
 			return new JsonResponse($final_api_reponse);
@@ -72,11 +73,11 @@ class CandidatesController extends ControllerBase {
 
 			$date = explode('/', $params['candidate_dob']);
 			$date_of_birth = $date[2] . "-" . $date[1] . "-" . $date[0];
-
 			$newCandidate = Node::create([
 				'type' => 'candidate_details',
 				'uid' => 1,
 				'title' => array('value' => $params['candidate_name']),
+				'field_email_id' => array('value' => $params['candidate_email']),
 				'field_date_of_birth' => array('value' => $date_of_birth),
 				'field_gender' => array('value' => $params['candidate_gender']),
 				'field_city' => array('value' => $params['candidate_city']),
@@ -93,36 +94,13 @@ class CandidatesController extends ControllerBase {
 			$new_candidate_details = $this->fetch_candidate_detail($nid);
 			$final_api_reponse = array(
 				"status" => "OK",
-				"message" => "Candidate Details Added Successfully",
+				"message" => "Candidate Data Added Successfully",
 				"result" => $new_candidate_details,
 			);
 			return new JsonResponse($final_api_reponse);
 		}
 		catch(Exception $exception) {
 			$this->exception_error_msg($exception->getMessage());
-		}
-	}
-
-	public function fetch_candidate_detail($nid){
-		if(!empty($nid)){
-			$node = \Drupal::entityManager()->getStorage('node')->load($nid);
-
-			$date = date_create($node->get('field_date_of_birth')->value);
-			$date_of_birth = date_format($date, "d/m/Y");
-			$candidate_details['candidate_name'] = $node->get('title')->value;
-			$candidate_details['candidate_dob'] = $date_of_birth;
-			$candidate_details['candidate_gender'] = $node->get('field_gender')->value;
-			$candidate_details['candidate_city'] = $node->get('field_city')->value;
-			$candidate_details['candidate_country'] = $node->get('field_country')->value;
-			$candidate_details['candidate_description'] = $node->get('field_description')->value;
-
-			$final_api_reponse = array(
-				'candidate_detail' => $candidate_details
-			);
-			return $final_api_reponse;
-		}
-		else{
-			$this->exception_error_msg("Candidate details not found.");
 		}
 	}
 
@@ -143,16 +121,20 @@ class CandidatesController extends ControllerBase {
 			$date_of_birth = $date[2] . "-" . $date[1] . "-" . $date[0];
 
 			if(!empty($nid)){
-				$node = \Drupal::entityManager()->getStorage('node')->load($nid);
+				$node = \Drupal::EntityTypeManager()->getStorage('node')->load($nid);
+				$node->set("field_email_id", array('value' => $params['candidate_email']));
 				$node->set("field_date_of_birth", array('value' => $date_of_birth));
 				$node->set("field_gender", array('value' => $params['candidate_gender']));
 				$node->set("field_city", array('value' => $params['candidate_city']));
 				$node->set("field_country", array('value' => $params['candidate_country']));
 				$node->set("field_description", array('value' => $params['candidate_description']));
 				$node->save();
+
+				$updated_candidate_details = $this->fetch_candidate_detail($nid);
 				$final_api_reponse = array(
 					"status" => "OK",
-					"message" => "Candidate Details Updated Successfully",
+					"message" => "Candidate Data Updated Successfully",
+					"result" => $updated_candidate_details,
 				);
 			}
 			else{
@@ -175,17 +157,46 @@ class CandidatesController extends ControllerBase {
 			$params = json_decode($content, TRUE);
 			$nid = $params['nid'];
 			if(!empty($nid)){
-				$node = \Drupal::entityManager()->getStorage('node')->load($nid);
+				$deleted_candidate_details = $this->fetch_candidate_detail($nid);
+				$node = \Drupal::EntityTypeManager()->getStorage('node')->load($nid);	
 				$node->delete();
 				$final_api_reponse = array(
 					"status" => "OK",
 					"message" => "Candidate record has been deleted successfully",
+					"result" => $deleted_candidate_details,
 				);
 			}
 			return new JsonResponse($final_api_reponse);
 		}
 		catch(Exception $exception) {
 			$web_service->error_exception_msg($exception->getMessage());
+		}
+	}
+
+	/**
+	* Fetch Candidates Details API based on Node-ID
+	*/
+	public function fetch_candidate_detail($nid){
+		if(!empty($nid)){
+			$node = \Drupal::EntityTypeManager()->getStorage('node')->load($nid);
+
+			$date = date_create($node->get('field_date_of_birth')->value);
+			$date_of_birth = date_format($date, "d M Y");
+			$candidate_details['candidate_name'] = $node->get('title')->value;
+			$candidate_details['candidate_email'] = $node->get('field_email_id')->value;
+			$candidate_details['candidate_dob'] = $date_of_birth;
+			$candidate_details['candidate_gender'] = ucfirst($node->get('field_gender')->value);
+			$candidate_details['candidate_city'] = $node->get('field_city')->value;
+			$candidate_details['candidate_country'] = $node->get('field_country')->value;
+			$candidate_details['candidate_description'] = $node->get('field_description')->value;
+
+			$final_api_reponse = array(
+				'candidate_detail' => $candidate_details
+			);
+			return $final_api_reponse;
+		}
+		else{
+			$this->exception_error_msg("Candidate details not found.");
 		}
 	}
 }
