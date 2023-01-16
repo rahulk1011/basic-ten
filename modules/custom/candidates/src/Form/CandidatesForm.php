@@ -26,40 +26,48 @@ class CandidatesForm extends FormBase {
 			'#type' => 'textfield',
 			'#title' => 'Candidate Name',
 			'#required' => TRUE,
+			'#default_value' => '',
 		);
 		$form['candidate_email'] = array(
 			'#type' => 'email',
 			'#title' => 'Email-ID',
 			'#required' => TRUE,
+			'#default_value' => '',
 		);
 		$form['candidate_dob'] = array(
 			'#type' => 'date',
 			'#title' => 'Date of Birth',
 			'#required' => TRUE,
+			'#default_value' => '',
 		);
 		$form['candidate_gender'] = array(
 			'#type' => 'select',
 			'#title' => 'Gender',
 			'#required' => TRUE,
 			'#options' => array(
+				'' => '-- Select --',
 				'male' => 'Male',
 				'female' => 'Female',
 			),
+			'#default_value' => '',
 		);
 		$form['candidate_city'] = array(
 			'#type' => 'textfield',
 			'#title' => 'City',
 			'#required' => TRUE,
+			'#default_value' => '',
 		);
 		$form['candidate_country'] = array(
 			'#type' => 'textfield',
 			'#title' => 'Country',
 			'#required' => TRUE,
+			'#default_value' => '',
 		);
 		$form['candidate_description'] = array(
 			'#type' => 'textarea',
 			'#title' => 'Description',
 			'#required' => TRUE,
+			'#default_value' => '',
 		);
 		$form['actions']['#type'] = 'actions';
 		$form['actions']['submit'] = array(
@@ -101,6 +109,13 @@ class CandidatesForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
+		// Mail details
+		$mail = array();
+		$mail["email"] = $form_state->getValue('candidate_email');
+		$mail["subject"] = "Welcome ".$form_state->getValue('candidate_name')."!!";
+		$mail["body"] = "Your details have been saved successfully in our database. A representative will reach out to you very soon..";
+
+		// Create & Save candidate details 
 		$node = Node::create(['type' => 'candidate_details']);
 		$node->langcode = "en";
 		$node->uid = 1;
@@ -116,5 +131,6 @@ class CandidatesForm extends FormBase {
 		$node->save();
 
 		\Drupal::messenger()->addMessage('Candidate Data Saved Successfully');
+		$send_mail = \Drupal::service('candidates_service')->candidate_notify_mail($mail);
 	}
 }
