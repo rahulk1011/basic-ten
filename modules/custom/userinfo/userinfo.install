@@ -1,0 +1,68 @@
+<?php
+use Drupal\Core\Database\Database;
+ 
+/**
+ * Implements hook_schema().
+ */
+function userinfo_schema(){
+    $schema['a_user_info'] = array(
+        'description' => 'The table for storing the user information',
+        'fields' => array(
+            'user_id' => array(
+                'description' => 'Primary identifier for User',
+                'type' => 'serial',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ),
+            'firstname' => array(
+                'description' => 'User First Name',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+           'lastname' => array(
+                'description' => 'User Last Name.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'email' => array(
+                'description' => 'User Email ID',
+                'type' => 'varchar',
+                'not null' => TRUE,
+                'length' => 255,
+            ),
+			'dob' => array(
+                'description' => 'Birthday of User',
+                'type' => 'varchar',
+                'mysql_type' => 'date',
+                'not null' => TRUE,
+            ),
+            'city' => array(
+                'description' => 'User City',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'state' => array(
+                'description' => 'User State',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'zipcode' => array(
+                'description' => 'User Zipcode',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+        ),
+        'primary key' => array('user_id'),
+    );
+    return $schema;
+}

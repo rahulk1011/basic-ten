@@ -1,0 +1,7 @@
+userinfo.form:
+ path: '/add-user-info'
+ defaults:
+  _title: 'Add User Info'
+  _form: '\Drupal\userinfo\Form\UserinfoForm'
+ requirements:
+  _permission: 'access content'

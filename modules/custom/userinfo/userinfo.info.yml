@@ -1,0 +1,6 @@
+name: User Info
+type: module
+description: A custom module to enter user information
+package: Custom
+version: 1.2
+core_version_requirement: ^9 || ^10

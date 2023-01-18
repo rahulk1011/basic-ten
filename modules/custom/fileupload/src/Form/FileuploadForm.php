@@ -117,6 +117,6 @@ class FileuploadForm extends FormBase {
 			fclose($file_to_read);
 			unlink($file_destination);
 		}
-		\Drupal::messenger()->addMessage($this->t('CSV data uploaded to the database'));
+		\Drupal::messenger()->addMessage('CSV data uploaded to the database');
 	}
 }	
