@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
-	<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Recipe Name</title>
-	<link href="../img/favicon.png" rel="icon" type="image/x-icon">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
-</head>
-<body>
-
 <!-- Header Start -->
-<header class="header">
+<header aria-label="Site header" class="header" id="header">
     <img class="logo" alt="Developer's Bakery" src="img/logo.png" />
     <nav class="main-nav">
         <ul class="main-nav-list">
-            <li><a class="main-nav-link" href="index.html">Home</a></li>
-            <li><a class="main-nav-link" href="menu.html">Menu</a></li>
+            <li><a class="main-nav-link" href="index.html">{{ page.navigation }}</a></li>
         </ul>
     </nav>
 </header>
@@ -29,7 +12,7 @@
 <!-- Main Section Start -->
 <main>
 	<!-- Recipe Image Section Start -->
-	<section class="recipe-section">
+	<section class="recipe-section" id="recipe-section">
 		<div class="recipe-container">
 			<div class="recipe-title">
 				<h2>Recipe Name</h2>
@@ -43,46 +26,14 @@
 					<h4>Ingredients</h4>
 					<div class="ingredient">
 						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Ingredient 1</label>
-					</div>
-					<div class="ingredient">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Ingredient 2</label>
-					</div>
-					<div class="ingredient">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Ingredient 3</label>
-					</div>
-					<div class="ingredient">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Ingredient 4</label>
-					</div>
-					<div class="ingredient">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Ingredient 5</label>
+						<label>{{ page.content }}</label>
 					</div>
 				</div>
 				<div class="recipe-instructions">
 					<h4>Instructions</h4>
 					<div class="instructions">
 						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Instruction 1</label>
-					</div>
-					<div class="instructions">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Instruction 2</label>
-					</div>
-					<div class="instructions">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Instruction 3</label>
-					</div>
-					<div class="instructions">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Instruction 4</label>
-					</div>
-					<div class="instructions">
-						<ion-icon name="caret-forward-outline" class="arrow-icon"></ion-icon>
-						<label>Instruction 5</label>
+						<label>{{ page.content }}</label>
 					</div>
 				</div>
 			</div>
@@ -93,15 +44,12 @@
 <!-- Main Section End -->
 
 <!-- Footer Section Start -->
-<footer class="footer">
+<footer aria-label="Site footer" class="footer" id="footer">
     <div class="footer-container">
-        <p class="copyright"><span class="year"></span></p>
+        <p class="copyright">{{ page.footer }}<span class="year"></span></p>
     </div>
 </footer>
 <!-- Footer Section End -->
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-</body>
-</html>

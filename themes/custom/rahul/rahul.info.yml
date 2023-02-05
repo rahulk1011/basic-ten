@@ -11,9 +11,6 @@ base theme: claro
 
 regions:
 	branding: Branding
-	navigation: Main navigation
-	search: Search
-	featured: Featured
+	navigation: Main Navigation
 	content: Content
-	right_sidebar: Right sidebar
 	footer: Footer
