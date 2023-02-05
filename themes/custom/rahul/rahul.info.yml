@@ -1,0 +1,19 @@
+name: Rahul Bakery
+type: theme
+description: 'Bakery theme for the website'
+package: Other
+core_version_requirement: ^9 || ^10
+
+libraries:
+	- rahul/global-styling
+
+base theme: claro
+
+regions:
+	branding: Branding
+	navigation: Main navigation
+	search: Search
+	featured: Featured
+	content: Content
+	right_sidebar: Right sidebar
+	footer: Footer

@@ -1,0 +1,418 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    /* Default font-size = 16px */
+    /* 1rem = 10px */
+    /* 10px / 16 px = 0.625 = 62.5% */
+    /* Percentage of user's browser font-size setting */
+    font-size: 62.5%;
+    overflow-x: hidden;
+    /* Doesn't work on Safari */
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Ruda', sans-serif;
+    line-height: 1;
+    font-weight: 400;
+    color: #555;
+    overflow-x: hidden;
+}
+/* General Resusable Components */
+.container {
+    /* 1140px */
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+}
+.heading-primary {
+    font-weight: 700;
+    color: #333;
+    letter-spacing: -0.5px;
+    font-size: 5.2rem;
+    line-height: 1.05;
+    margin-bottom: 3.2rem;
+}
+/* **** Header Section **** */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1e1c1;
+    max-height: 15vh;
+    border-bottom: 1px solid #333;
+  
+    /* Sticky navigation */
+    height: 9.6rem;
+    padding: 0 20rem;
+    position: relative;
+}
+.logo {
+    height: 6.4rem;
+}
+  
+/* **** Navigation **** */
+.main-nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 4.8rem;
+}
+.main-nav-link:link,
+.main-nav-link:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #222;
+    font-weight: 700;
+    font-size: 2.4rem;
+    transition: all 0.3s;
+}
+.main-nav-link:hover,
+.main-nav-link:active {
+    color: #d62828;
+}
+
+/* **** Sticky Navigation **** */
+.sticky .header {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 8rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: rgba(255, 255, 255, 0.97);
+    z-index: 9999;
+    box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+}
+.sticky .section-hero {
+    margin-top: 9.6rem;
+}
+
+/* **** Hero Section **** */
+.section-hero {
+    background: linear-gradient(0deg, #f1e1c1 0%, #fdfaf5 60%);
+    padding: 4.8rem 0 9.6rem 0;
+    min-height: 81vh;
+}
+.hero {
+    max-width: 130rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9.6rem;
+    align-items: center;
+}
+.hero-description {
+    font-size: 2rem;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
+}
+.hero-img-box img {
+    border: 2px solid #887055;
+    border-radius: 2px;
+}
+.hero-img {
+    width: 100%;
+}
+.i-red {
+    color: #d62828;
+    font-weight: 800;
+}
+
+/* **** All Recipe Section **** */
+.section-recipes {
+    margin: 5rem 0;
+}
+.heading-recipe {
+    font-weight: 600;
+    color: #333;
+    font-size: 4.8rem;
+    margin-bottom: 1.4rem
+}
+.recipes-container {
+    padding: 1rem 16rem;
+    background-color: #fdfaf5;
+}
+.recipes-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+	grid-gap: 2.4rem;
+    margin-top: 2.4rem;
+}
+.recipes-item {
+    text-align: center;
+}
+.recipes-img {
+    border-radius: 50%;
+    margin-bottom: 2.4rem;
+}
+.recipes-item img {
+    display: block;
+    width: 100%;
+    border: 5px solid #555;
+	transition: all 0.5s ease-in-out;
+}
+.recipes-item img:hover {
+    transform: scale(1.1);
+}
+.recipes-name {
+    font-weight: 600;
+    color: #555;
+    font-size: 20px;
+    text-decoration: none;
+}
+.recipes-name:hover {
+    color: #d62828;
+    transform: scale(1.1);
+}
+
+/* **** Recipe Page Section **** */
+.recipe-section {
+    padding: 0 2.4rem;
+    min-height: 81vh;
+    background: linear-gradient(0deg, #f1e1c1 0%, #fdfaf5 40%);
+}
+.recipe-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.4rem;
+    padding: 0 8rem;
+}
+.recipe-title {
+    padding-top: 2rem;
+    text-align: center;
+}
+.recipe-title h2 {
+    margin-bottom: 2rem;
+}
+.recipe-detail {
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+    column-gap: 3.2rem;
+}
+.recipe-title h2 {
+    font-weight: 700;
+    font-size: 4.8rem;
+}
+.recipe-img {
+    width: 100%;
+}
+.recipe-img img {
+    width: 35rem;
+    height: 35rem;
+    border: 3px solid #555;
+    border-radius: 50%;
+    align-content: center;
+    transition: all 0.5s ease-in-out;
+}
+.recipe-img img:hover {
+    transform: scale(1.05);
+}
+.recipe-ingredients h4,
+.recipe-instructions h4 {
+    font-weight: 600;
+    font-size: 2.4rem;
+    padding-left: 0.5rem;
+    padding-bottom: 1rem;
+}
+.recipe-ingredients,
+.recipe-instructions {
+    padding-top: 1rem;
+    width: 100%;
+}
+.arrow-icon {
+    font-size: 1.6rem;
+    align-self: center;
+}
+.ingredient,
+.instructions {
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    margin: 2rem 0;
+}
+.ingredient label,
+.instructions label {
+    font-size: 1.6rem;
+}
+
+/* **** Footer Section **** */
+.footer {
+    bottom: 0;
+    width: 100%;
+    max-height: 10vh;
+    padding: 0.4rem 0;
+    border-top: 1px solid #ccc;
+    background: linear-gradient(180deg, #ebf4f5 0%, #b3c5df 100%);
+    background: linear-gradient(0deg, #08213f 0%, #547b92 100%);
+}
+.footer-container {
+    padding: 1.2rem 0;
+    text-align: center;
+}
+.copyright {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 400;
+}
+
+/* **** Media Queries Section **** */
+/*
+rem & em DO NOT depend on HTML font-size in media queries
+Instead, 1rem = 1em = 16px
+*/
+  
+/* Below 75*16 = 1200 px (Landscape tablets) */
+@media (max-width: 75em) {
+    html {
+        /* 9px / 16px = 56.25% */
+        font-size: 56.25%;
+    }
+    .section-hero {
+        padding: 3.2rem 6.4rem;
+    }
+    .recipe-title h2 {
+        font-size: 4rem;
+    }
+    .recipe-img img {
+        width: 30rem;
+        height: 30rem;
+    }
+}
+
+/* Below 59*16 = 944 px (Tablets) */
+@media (max-width: 59em) {
+    html {
+        /* 8px / 16px = 50% */
+        font-size: 45%;
+    }
+    .section-hero {
+        min-height: 84.5vh;
+    }
+    .hero {
+        margin-top: 3.2rem;
+    }
+    .section-recipes {
+        margin: 2rem 0;
+    }
+    .heading-recipe {
+        font-size: 3.6rem;
+    }
+    .recipes-item {
+        align-items: center;
+    }
+    .recipes-item img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20rem;
+        height: 20rem;
+    }
+    .recipe-container {
+        padding: 2.4rem 7.2rem;
+    }
+    .recipe-detail {
+        column-gap: 2rem;
+    }
+    .recipe-section {
+        min-height: 84.5vh;
+    }
+    .recipes-name {
+        font-size: 2.4rem;
+    }
+    .recipe-img img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30rem;
+        height: 30rem;
+    }
+}
+
+/* Below 34*16 = 544 px (Phones) */
+@media (max-width: 34em) {
+    html {
+        font-size: 55%;
+    }
+    .header {
+        padding: 0 5rem;
+    }
+    .logo {
+        width: 7.2rem;
+        height: auto;
+    }
+    .main-nav-link:link, .main-nav-link:visited {
+        font-size: 1.8rem;
+    }
+    .hero {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.2rem;
+    }
+    .hero-text-box {
+        text-align: center;
+    }
+    .hero-img-box {
+        width: 45rem;
+        height: auto;
+    }
+    .hero-img-box img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-img {
+        width: 75%;
+    }
+    .heading-recipe {
+        padding-left: 2.4rem;
+    }
+    .section-hero {
+        padding: 2.4rem 0 6.4rem 0;
+        min-height: 85vh;
+    }
+    .recipes-container {
+        padding: 0 3.6rem;
+        min-height: 85vh;
+    }
+    .recipes-row {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        margin: 3.6rem 0;
+    }
+    .recipes-item {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        text-align: left;
+    }
+    .recipes-img {
+        margin-bottom: 0;
+    }
+    .recipes-item img {
+        width: 8.4rem;
+        height: auto;
+        border: 1px solid #444;
+    }
+    .recipe-container {
+        padding: 2.4rem;
+    }
+    .recipe-title {
+        padding-top: 0;
+    }
+    .recipe-title h2 {
+        font-size: 3.6rem;
+    }
+    .recipe-detail {
+        display: flex;
+        flex-direction: column;
+    }
+    .recipe-img {
+        margin-bottom: 2rem;
+    }
+}
