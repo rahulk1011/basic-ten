@@ -1,0 +1,7 @@
+fernweh:
+  version: 1.x
+  css:
+    theme:
+      css/fernweh.css: {}
+  js:
+      js/fernweh.js: {}

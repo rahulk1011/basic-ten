@@ -1,0 +1,52 @@
+mail_login.settings:
+  type: config_object
+  label: 'Mail Login settings'
+  mapping:
+    mail_login_enabled:
+      type: integer
+      label: 'Mail Login enabled'
+    mail_login_case_sensitive:
+      type: integer
+      label: 'Email addresses are case-sensitive'
+    mail_login_email_only:
+      type: integer
+      label: 'Login by email address only'
+    mail_login_override_login_labels:
+      type: integer
+      label: 'Override login labels'
+    mail_login_username_title:
+      type: text
+      label: 'Login form username/email address label'
+      translatable: true
+    mail_login_username_description:
+      type: text
+      label: 'Login form username/email address description'
+      translatable: true
+    mail_login_email_only_title:
+      type: text
+      label: 'Login form email address only label'
+      translatable: true
+    mail_login_email_only_description:
+      type: text
+      label: 'Login form email address only description'
+      translatable: true
+    mail_login_password_only_description:
+      type: text
+      label: 'Login form password only description'
+      translatable: true
+    mail_login_password_reset_username_title:
+      type: text
+      label: 'Password reset form username/email address label'
+      translatable: true
+    mail_login_password_reset_username_description:
+      type: text
+      label: 'Password reset form username/email address description'
+      translatable: true
+    mail_login_password_reset_email_only_title:
+      type: text
+      label: 'Password reset form email address only label'
+      translatable: true
+    mail_login_password_reset_email_only_description:
+      type: text
+      label: 'Password reset form email address only description'
+      translatable: true

@@ -1,0 +1,12 @@
+# Config Schema for Firebase.
+
+firebase.settings:
+  type: config_object
+  label: 'Firebase settings'
+  mapping:
+    server_key:
+      type: string
+      label: 'Firebase server key'
+    sender_id:
+      type: string
+      label: 'Firebase sender ID'

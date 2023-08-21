@@ -1,0 +1,17 @@
+<div id="MAS" >
+  <header>
+    <div id="logo"><img src="{{ base_path ~ directory }}/images/hfu_color_logo.svg" alt="Holy Family University logo"/></div>
+    <div id="slogan">{{ node.field_slogan.0.value|raw }}</div>
+  </header>
+  <main id="HO">
+    <section id="hero">{{ content.field_poster.0 }}</section>
+    <aside id="FM">
+      <div class="formbox">{{ node.field_salesforce.0.value|raw }}</div>
+    </aside>
+  </main>
+  <main id="Content">
+    <section id="PC"> {{ node.body.value|raw }} </section>
+    <img src="{{ file_url(content.field_poster.0.entity.uri.value) }}" />
+  </main>
+<footer>&nbsp;</footer>
+</div>

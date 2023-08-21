@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the mail_login module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function mail_login_uninstall() {
+  // Deleting the configuration settings while uninstalling the module.
+  \Drupal::configFactory()->getEditable('mail_login.settings')->delete();
+}
+
+/**
+ * Add new configuration options for the password reset form.
+ */
+function mail_login_update_9001() {
+  $config = \Drupal::configFactory()->getEditable('mail_login.settings');
+  $config->set('mail_login_password_reset_username_title', 'Username or email address');
+  $config->set('mail_login_password_reset_username_description', 'Password reset instructions will be sent to your registered email address.');
+  $config->set('mail_login_password_reset_email_only_title', 'Email address');
+  $config->set('mail_login_password_reset_email_only_description', 'Password reset instructions will be sent to your registered email address.');
+  $config->save(TRUE);
+}
+
+/**
+ * Add new configuration options for the password reset form.
+ */
+function mail_login_update_9002() {
+  $config = \Drupal::configFactory()->getEditable('mail_login.settings');
+  $config->set('mail_login_case_sensitive', 1);
+  $config->save(TRUE);
+}

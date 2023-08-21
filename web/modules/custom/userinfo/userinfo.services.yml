@@ -1,0 +1,3 @@
+services:
+  userinfo_service:
+    class: Drupal\userinfo\Service\Userinfo

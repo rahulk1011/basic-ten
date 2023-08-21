@@ -1,0 +1,7 @@
+fileupload.form:
+ path: '/upload-csv'
+ defaults:
+  _title: 'CSV File Upload'
+  _form: '\Drupal\fileupload\Form\FileuploadForm'
+ requirements:
+  _permission: 'access content'

@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Update functions for Firebase.
+ *
+ * @ingroup firebase
+ */
+
+/**
+ * Update configuration.
+ */
+function firebase_update_8200() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('firebase.settings');
+  $config->clear('endpoint');
+  $config->set('sender_id', '');
+  $config->save();
+}

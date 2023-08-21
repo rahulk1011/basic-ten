@@ -1,0 +1,13 @@
+{
+  "name": "drupal/hal",
+  "description": "Hypermedia Application Language (HAL)",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "drupal/core": "^10"
+  },
+  "require-dev": {
+    "drupal/entity_reference_revisions": "1.x-dev",
+    "drupal/aggregator": "2.x-dev"
+  }
+}

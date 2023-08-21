@@ -1,0 +1,35 @@
+{{ attach_library('candidates/candidates') }}
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th class="c-id">ID</th>
+                <th class="c-name">Name</th>
+                <th class="c-email">Email</th>
+                <th class="c-dob">Birth Date</th>
+                <th class="c-gender">Gender</th>
+                <th class="c-country">Country</th>
+                <th class="c-country">Passport</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.id }}</td>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.email }}</td>
+                    <td>{{ candidate.dob }}</td>
+                    <td>{{ candidate.gender }}</td>
+                    <td>{{ candidate.country }}</td>
+                    <td>
+                        {% if candidate.passport == 'yes' %}
+                            {{ candidate.passport_number }}
+                        {% else %}
+                            {{ 'N.A' }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<div>

@@ -1,0 +1,5 @@
+candidates:
+  version: 1.x
+  css:
+    theme:
+      css/candidates.css: {}

@@ -1,0 +1,7 @@
+sendmail.form:
+    path: '/send-mails'
+    defaults:
+        _form: '\Drupal\sendmail\Form\SendmailForm'
+        _title: 'Send Sample Mails'
+    requirements: 
+        _permission: 'access content'

@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Mail Login: This module enables users to login by email address.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function mail_login_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // We only want to alter the login and password reset form.
+  if (!in_array($form_id, ['user_login_form', 'user_pass'])) {
+    return;
+  }
+
+  // Load module configurations.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->get('mail_login.settings');
+
+  // Don't alter anything if the settings are disabled or if the override
+  // labels is disabled.
+  if (!$config->get('mail_login_enabled') || !$config->get('mail_login_override_login_labels')) {
+    return;
+  }
+
+  switch ($form_id) {
+    case 'user_login_form':
+      // Check for settings to override login form username
+      // title and description.
+      $username_label = $config->get('mail_login_username_title');
+      $description = $config->get('mail_login_username_description');
+
+      // Use email only labels if enabled.
+      if ($config->get('mail_login_email_only')) {
+        $username_label = $config->get('mail_login_email_only_title');
+        $description = $config->get('mail_login_email_only_description');
+        $password_description = $config->get('mail_login_password_only_description');
+        $form['pass']['#description'] = $password_description;
+      }
+
+      $form['name']['#title'] = $username_label;
+      $form['name']['#description'] = $description;
+      break;
+
+    case 'user_pass':
+      // Check for settings to override login form username
+      // title and description.
+      $username_label = $config->get('mail_login_password_reset_username_title');
+      $description = $config->get('mail_login_password_reset_username_description');
+
+      // Use email only labels if enabled.
+      if ($config->get('mail_login_email_only')) {
+        $username_label = $config->get('mail_login_password_reset_email_only_title');
+        $description = $config->get('mail_login_password_reset_email_only_description');
+      }
+
+      $form['name']['#title'] = $username_label;
+      $form['mail']['#markup'] = $description;
+      break;
+  }
+}

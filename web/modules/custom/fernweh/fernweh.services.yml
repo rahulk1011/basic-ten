@@ -1,0 +1,3 @@
+services:
+  fernweh_service:
+    class: Drupal\fernweh\Service\Fernweh

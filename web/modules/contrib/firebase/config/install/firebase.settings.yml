@@ -1,0 +1,4 @@
+# These are the default values of the configuration for Firebase.
+
+server_key: ''
+sender_id: ''

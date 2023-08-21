@@ -1,0 +1,28 @@
+fernweh.fernweh:
+  path: '/admin/config/development/fernweh'
+  defaults:
+    _form: '\Drupal\fernweh\Form\FernwehForm'
+    _title: 'Fernweh Admin'
+  requirements:
+    _permission: 'administer site configuration'
+fernweh.AddUserForm:
+  path: '/user-register'
+  defaults:
+    _title: 'User Register'
+    _form: '\Drupal\fernweh\Form\AddUserForm'
+  requirements:
+    _permission: 'access content'
+fernweh.DeleteUserForm:
+  path: '/delete-user'
+  defaults:
+    _title: 'Delete User'
+    _form: '\Drupal\fernweh\Form\DeleteUserForm'
+  requirements:
+    _permission: 'access content'
+fernweh.ActivateUserForm:
+  path: '/activate-user'
+  defaults:
+    _title: 'Activate User'
+    _form: '\Drupal\fernweh\Form\ActivateUserForm'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,6 @@
+name: Candidates Data
+type: module
+description: A form to enter candidate details
+package: Custom
+core_version_requirement: ^9 || ^10
+version: 1.1

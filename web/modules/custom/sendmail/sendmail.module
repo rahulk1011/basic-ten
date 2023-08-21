@@ -1,0 +1,23 @@
+<?php
+
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+
+/**
+* Implements hook_mail().
+*/
+function sendmail_mail($key, &$message, $params) {
+    $options = array(
+        'langcode' => $message['langcode'],
+    );
+    switch ($key) {
+        case 'sample_mail':
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['from'] = \Drupal::config('system.site')->get('mail');
+            $message['subject'] = $params['title'];
+            $message['body'][] = $params['message'];
+            break;
+    }
+}

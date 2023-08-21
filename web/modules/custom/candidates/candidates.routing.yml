@@ -1,0 +1,43 @@
+candidates.form:
+  path: '/add-candidates'
+  defaults:
+    _title: 'Add Candidates'
+    _form: '\Drupal\candidates\Form\CandidatesForm'
+  requirements:
+    _permission: 'access content'
+
+candidates.candidates:
+  path: '/all-candidates'
+  defaults:
+    _title: 'All Candidates'
+    _controller: '\Drupal\candidates\Controller\CandidatesController::all_candidates'
+  requirements:
+    _access: 'TRUE'
+
+get_candidate_detail:
+  path: 'api/candidate-list'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::get_candidate_detail' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'
+
+add_candidate_detail:
+  path: 'api/add-candidate'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::add_candidate_detail' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'
+
+edit_candidate_detail:
+  path: 'api/edit-candidate'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::edit_candidate_detail' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'
+
+delete_candidate :
+  path: 'api/delete-candidate'
+  defaults: { _controller: '\Drupal\candidates\Controller\CandidatesController::delete_candidate' }
+  methods: [POST]
+  requirements:
+    _permission: 'access content'

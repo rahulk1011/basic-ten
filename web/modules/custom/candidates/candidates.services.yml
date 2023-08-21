@@ -1,0 +1,3 @@
+services:
+  candidates_service:
+    class: Drupal\candidates\Service\Candidates
