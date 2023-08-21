@@ -26,11 +26,23 @@ function candidates_mail($key, &$message, $params) {
 * Implements hook_theme().
 */
 function candidates_theme($existing, $type, $theme, $path) {
-    return [
-        'candidate_list' => [
-            'variables' => ['candidates' => [], 'title' => ''],
+    $element['candidate_list'] = [
+        'variables' => [
+            'candidates' => [],
+            'title' => ''
         ],
     ];
+    $element['node__candidate'] = [
+        'template' => 'node--candidate',
+        'base hook' => 'node',
+    ];
+    return $element;
+}
+
+function candidates_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    if(in_array('node__candidate', $suggestions)){
+        $suggestions[] = 'candidate';
+    }
 }
 
 /**

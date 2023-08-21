@@ -1,0 +1,16 @@
+<div class="candidate-details">
+    <p><strong>Email-ID: </strong>{{ node.field_email_id.value }}</p>
+    {% set birth_date = node.field_date_of_birth.value|split('-') %}
+    <p><strong>Date of Birth: </strong>{{ birth_date[2]~'-'~birth_date[1]~'-'~birth_date[0] }}</p>
+    {% if node.field_gender.value == 'male' %}
+        <p><strong>Gender: </strong>Male</p>
+    {% else %}
+        <p><strong>Gender: </strong>Female</p>
+    {% endif %}
+    <p><strong>Country: </strong>{{ node.field_country.value }}</p>
+    {% if node.field_passport.value == 'yes' %}
+        <p><strong>Passport: </strong>{{ node.field_passport_number.value }}</p>
+    {% else %}
+        <p><strong>Passport: </strong>N.A</p>
+    {% endif %}
+</div>
