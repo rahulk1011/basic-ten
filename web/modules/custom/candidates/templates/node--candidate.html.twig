@@ -1,7 +1,9 @@
+{{ attach_library('candidates/candidates') }}
 <div class="candidate-details">
     <p><strong>Email-ID: </strong>{{ node.field_email_id.value }}</p>
-    {% set birth_date = node.field_date_of_birth.value|split('-') %}
-    <p><strong>Date of Birth: </strong>{{ birth_date[2]~'-'~birth_date[1]~'-'~birth_date[0] }}</p>
+    {% set dob = node.field_date_of_birth.value|split('-') %}
+    {% set birth_date = dob[2]~'-'~dob[1]~'-'~dob[0] %}
+    <p><strong>Date of Birth: </strong>{{ birth_date }}</p>
     {% if node.field_gender.value == 'male' %}
         <p><strong>Gender: </strong>Male</p>
     {% else %}
