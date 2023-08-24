@@ -94,12 +94,8 @@ class UserRegistrationRest extends ResourceBase {
 				$user_full_name = ucfirst($params['first_name']).' '.ucfirst($params['last_name']);
 				$user_email = $params['email_id'];
 
-				$email_query = \Drupal::entityQuery('user');
-                $email_query->accessCheck(TRUE);
-                $email_check = $email_query->condition('mail', $user_email)->execute();
-                $username_query = \Drupal::entityQuery('user');
-                $username_query->accessCheck(TRUE);
-				$username_check = $username_query->condition('name', $user_name)->execute();
+                $email_check = \Drupal::entityQuery('user')->accessCheck(TRUE)->condition('mail', $user_email)->execute();
+				$username_check = \Drupal::entityQuery('user')->accessCheck(TRUE)->condition('name', $user_name)->execute();
 
 				if (!empty($email_check) || !empty($username_check)) {
 					$final_api_reponse = array(
