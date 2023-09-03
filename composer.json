@@ -32,6 +32,7 @@
         "drupal/mailsystem": "^4.4",
         "drupal/pathauto": "^1.11",
         "drupal/restui": "^1.21",
+        "drupal/simple_oauth": "^5.2",
         "drupal/smtp": "^1.2"
     },
     "conflict": {
