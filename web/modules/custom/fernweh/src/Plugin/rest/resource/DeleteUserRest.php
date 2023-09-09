@@ -59,7 +59,7 @@ class DeleteUserRest extends ResourceBase {
             $module_id,
             $module_definition,
             $container->getParameter('serializer.formats'),
-            $container->get('logger.factory')->get('add_store_api'),
+            $container->get('logger.factory')->get('delete_user_api'),
             $container->get('current_user')
 		);
 	}
@@ -79,7 +79,7 @@ class DeleteUserRest extends ResourceBase {
 
             if ($params['confirm'] == 1) {
                 if($user_id != 0 && $user_id != 1) {
-                    \Drupal::logger('delete_account_api')->notice($message);
+                    \Drupal::logger('delete_user_api')->notice($message);
                     // Send account delete request mail to Admin
 					$send_mail = \Drupal::service('fernweh_service')->DeleteUserAccount($user_email, $full_name);
                     // Delete the whole user account

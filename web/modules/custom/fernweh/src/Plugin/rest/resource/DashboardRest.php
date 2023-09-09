@@ -58,7 +58,7 @@ class DashboardRest extends ResourceBase {
             $module_id,
             $module_definition,
             $container->getParameter('serializer.formats'),
-            $container->get('logger.factory')->get('all_faq_api'),
+            $container->get('logger.factory')->get('user_dashboard_api'),
             $container->get('current_user')
 		);
 	}
