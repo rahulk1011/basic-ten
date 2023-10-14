@@ -45,7 +45,8 @@ Go to "/admin/config/people/accounts/mail-login" for the configuration screen,
  * Login form username title: Override the username field title.
  * Login form username description: Override the username field description.
  * Password reset form username title: Override the username field title.
- * Password reset form username description: Override the username field description.
+ * Password reset form username description: Override the
+ username field description.
 
 ## Maintainers
 
