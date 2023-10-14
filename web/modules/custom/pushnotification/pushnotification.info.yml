@@ -1,0 +1,6 @@
+name: Push Notification
+type: module
+description: A custom module to send push notification
+package: Custom
+version: 1.1
+core_version_requirement: ^9 || ^10

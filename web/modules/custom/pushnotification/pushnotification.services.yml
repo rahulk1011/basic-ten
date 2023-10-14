@@ -1,0 +1,3 @@
+services:
+  pushnotification_service:
+    class: Drupal\pushnotification\Service\PushNotification
