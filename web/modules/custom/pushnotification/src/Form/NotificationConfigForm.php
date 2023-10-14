@@ -50,6 +50,8 @@ class NotificationConfigForm extends ConfigFormBase {
             '#default_value' => $config->get('pushnotification.fcm_url'),
             '#description' => $this->t('Please enter FCM URL'),
         );
+
+        // Send Custom Push Notification
         $form['send_notification'] = array(
             '#type' => 'details',
             '#title' => t('Send Push Notification'),
