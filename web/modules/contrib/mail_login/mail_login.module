@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * Implements hook_form_alter().
@@ -19,6 +20,15 @@ function mail_login_form_alter(array &$form, FormStateInterface $form_state, $fo
   // Load module configurations.
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->get('mail_login.settings');
+
+  if ($form_id == 'user_login_form') {
+    $validate_final_i = array_search('::validateFinal', $form['#validate']);
+    $form['#validate'] = array_merge(
+      array_slice($form['#validate'], 0, $validate_final_i),
+      ['mail_login_validate_authentication'],
+      array_slice($form['#validate'], $validate_final_i),
+    );
+  }
 
   // Don't alter anything if the settings are disabled or if the override
   // labels is disabled.
@@ -60,5 +70,97 @@ function mail_login_form_alter(array &$form, FormStateInterface $form_state, $fo
       $form['name']['#title'] = $username_label;
       $form['mail']['#markup'] = $description;
       break;
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function mail_login_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.mail_login':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module enables users to login by email address with the minimal configurations. For configuring mail login go to "/admin/config/people/mail-login".') . '</p>';
+      $output .= '<h3>' . t('Available configurations:') . '</h3>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('<b>Enable login by email address:</b> This option enables login by email address.') . '</li>';
+      $output .= '<li>' . t('<b>Override login form:</b> This option allows you to override the login form username title/description.') . '</li>';
+      $output .= '<li>' . t('<b>Login by email address only:</b> This option disables login by username and forces login by email address only.') . '</li>';
+      $output .= '<li>' . t('<b>Override login form:</b> This option allows you to override the login form username title/description.') . '</li>';
+      $output .= '<li>' . t('<b>Login form username/email address label:</b> Override the username field title.') . '</li>';
+      $output .= '<li>' . t('<b>Login form username/email address description:</b> Override the username field description.') . '</li>';
+      $output .= '<li>' . t('<b>Login form email address only label:</b> Override the username field title.') . '</li>';
+      $output .= '<li>' . t('<b>Login form email address only description:</b> Override the username field description.') . '</li>';
+      $output .= '</ul>';
+      return $output;
+  }
+}
+
+/**
+ * Adding validation for email login.
+ */
+function mail_login_validate_authentication($form, &$form_state) {
+  $config = \Drupal::configFactory()->get('mail_login.settings');
+
+  $password = trim($form_state->getValue('pass'));
+  $flood_config = \Drupal::configFactory()->get('user.flood');
+  if (!$form_state->isValueEmpty('name') && strlen($password) > 0) {
+    // Do not allow any login from the current user's IP if the limit has been
+    // reached. Default is 50 failed attempts allowed in one hour. This is
+    // independent of the per-user limit to catch attempts from one IP to log
+    // in to many different user accounts.  We have a reasonably high limit
+    // since there may be only one apparent IP for all users at an institution.
+    if (!\Drupal::service('user.flood_control')->isAllowed('user.failed_login_ip', $flood_config->get('ip_limit'), $flood_config->get('ip_window'))) {
+      $form_state->set('flood_control_triggered', 'ip');
+      return;
+    }
+
+    $account = NULL;
+    // If mail login is enabled, check mail address.
+    if ($config->get('mail_login_enabled')) {
+      if (filter_var($form_state->getValue('name'), FILTER_VALIDATE_EMAIL)) {
+        $accounts = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties([
+          'mail' => $form_state->getValue('name'),
+          'status' => 1,
+        ]);
+        $account = reset($accounts);
+      }
+    }
+    // If no user was found using the email, and username login is enabled,
+    // check username.
+    if (empty($account) && !$config->get('mail_login_email_only')) {
+      $accounts = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties([
+        'name' => $form_state->getValue('name'),
+        'status' => 1,
+      ]);
+      $account = reset($accounts);
+    }
+
+    if ($account) {
+      if ($flood_config->get('uid_only')) {
+        // Register flood events based on the uid only, so they apply for any
+        // IP address. This is the most secure option.
+        $identifier = $account->id();
+      }
+      else {
+        // The default identifier is a combination of uid and IP address. This
+        // is less secure but more resistant to denial-of-service attacks that
+        // could lock out all users with public user names.
+        $identifier = $account->id() . '-' . \Drupal::request()->getClientIp();
+      }
+      $form_state->set('flood_control_user_identifier', $identifier);
+
+      // Don't allow login if the limit for this user has been reached.
+      // Default is to allow 5 failed attempts every 6 hours.
+      if (!\Drupal::service('user.flood_control')->isAllowed('user.failed_login_user', $flood_config->get('user_limit'), $flood_config->get('user_window'), $identifier)) {
+        $form_state->set('flood_control_triggered', 'user');
+        return;
+      }
+    }
+    // We are not limited by flood control, so try to authenticate.
+    // Store $uid in form state as a flag for self::validateFinal().
+    $uid = \Drupal::service('user.auth')->authenticate($form_state->getValue('name'), $password);
+    $form_state->set('uid', $uid);
   }
 }

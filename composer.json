@@ -27,9 +27,9 @@
         "drupal/devel": "^5.1",
         "drupal/devel_kint_extras": "^1.1",
         "drupal/hal": "^2.0",
-        "drupal/mail_login": "^2.7",
+        "drupal/mail_login": "^2.9",
         "drupal/mailsystem": "^4.4",
-        "drupal/pathauto": "^1.11",
+        "drupal/pathauto": "^1.12",
         "drupal/restui": "^1.21",
         "drupal/smtp": "^1.2"
     },
