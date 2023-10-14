@@ -8,6 +8,7 @@
 namespace Drupal\pushnotification\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 class NotificationConfigForm extends ConfigFormBase {
     /**
@@ -48,6 +49,18 @@ class NotificationConfigForm extends ConfigFormBase {
             '#title' => $this->t('FCM URL'),
             '#default_value' => $config->get('pushnotification.fcm_url'),
             '#description' => $this->t('Please enter FCM URL'),
+        );
+        $form['send_notification'] = array(
+            '#type' => 'details',
+            '#title' => t('Send Push Notification'),
+            '#description' => t('Send Push Notification Link'),
+            '#open' => FALSE,
+        );
+        $form['send_notification']['send_notification_link'] = array(
+            '#type' => 'link',
+            '#title' => $this->t('Send Notification'),
+            '#url' => Url::fromRoute('pushnotification.pushnotification'),
+            '#attributes' => ['target' => '_blank'],
         );
         return $form;
     }
