@@ -1,5 +1,0 @@
-firebase.configuration:
-  title: 'Firebase Configuration'
-  description: 'Configure Firebase Cloud Messaging'
-  parent: system.admin_config_system
-  route_name: firebase.configuration
