@@ -1,8 +1,0 @@
-{
-    "name": "drupal/firebase",
-    "description": "Provides a service to send notifications via Google Firebase.",
-    "type": "drupal-module",
-    "require": {
-        "php": ">=7.4.0"
-    }
-}
