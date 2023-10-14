@@ -1,0 +1,14 @@
+pushnotification.notificationconfig:
+  path: '/admin/config/development/pushnotification'
+  defaults:
+    _form: '\Drupal\pushnotification\Form\NotificationConfigForm'
+    _title: 'Push Notification Configuration'
+  requirements:
+     _permission: 'administer site configuration'
+pushnotification.pushnotification:
+  path: '/admin/custom-pushnotification'
+  defaults:
+    _title: 'Custom Push Notification'
+    _form: '\Drupal\pushnotification\Form\PushnotificationForm'
+  requirements:
+    _permission: 'access content'

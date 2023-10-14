@@ -1,0 +1,5 @@
+pushnotification.pushnotification:
+  title: Push Notification
+  description: 'Custom Push Notification services link'
+  parent: system.admin_config_development
+  route_name: pushnotification.notificationconfig
