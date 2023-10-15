@@ -1,0 +1,5 @@
+freeapi.freeapi:
+  title: Free API
+  description: 'Free API services link'
+  parent: system.admin_config_development
+  route_name: freeapi.apiconfig

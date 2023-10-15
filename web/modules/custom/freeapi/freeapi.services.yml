@@ -1,0 +1,3 @@
+services:
+  freeapi_service:
+    class: Drupal\freeapi\Service\FreeAPI

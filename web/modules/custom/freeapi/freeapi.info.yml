@@ -1,0 +1,6 @@
+name: Free API Testing
+type: module
+description: A custom module to test free APIs
+package: Custom
+core_version_requirement: ^10
+version: 1.0

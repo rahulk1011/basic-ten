@@ -1,0 +1,14 @@
+freeapi.apiconfig:
+  path: '/admin/config/development/freeapi'
+  defaults:
+    _form: '\Drupal\freeapi\Form\APIConfigForm'
+    _title: 'Free API Configuration'
+  requirements:
+    _permission: 'administer site configuration'
+freeapi.WeatherForm:
+  path: '/get-weather'
+  defaults:
+    _title: 'Get Weather'
+    _form: '\Drupal\freeapi\Form\WeatherForm'
+  requirements:
+    _permission: 'access content'
